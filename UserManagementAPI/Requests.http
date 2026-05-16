@@ -1,26 +1,26 @@
-### Base URL
-@baseUrl = https://localhost:5001
+### Base URL (⚠️ replace with your Codespaces URL)
+@baseUrl = https://super-duper-adventure-54vv779q69gc4wj-5088.app.github.dev
 @token = my-secret-token
 
 ### -----------------------------------
-### GET all users (WITH TOKEN)
+### ✅ GET all users (SUCCESS)
 GET {{baseUrl}}/api/users
 Authorization: {{token}}
 
 ###
 
-### GET all users (NO TOKEN - should fail)
+### ❌ GET all users (NO TOKEN - should fail)
 GET {{baseUrl}}/api/users
 
 ###
 
-### GET user by ID
-GET {{baseUrl}}/api/users/1
-Authorization: {{token}}
+### ❌ GET all users (INVALID TOKEN)
+GET {{baseUrl}}/api/users
+Authorization: wrong-token
 
 ###
 
-### CREATE new user
+### ✅ CREATE new user
 POST {{baseUrl}}/api/users
 Content-Type: application/json
 Authorization: {{token}}
@@ -33,20 +33,13 @@ Authorization: {{token}}
 
 ###
 
-### CREATE invalid user (should fail validation)
-POST {{baseUrl}}/api/users
-Content-Type: application/json
+### ✅ GET user by ID (after POST)
+GET {{baseUrl}}/api/users/1
 Authorization: {{token}}
-
-{
-  "name": "",
-  "email": "invalid",
-  "role": ""
-}
 
 ###
 
-### UPDATE user
+### ✅ UPDATE user
 PUT {{baseUrl}}/api/users/1
 Content-Type: application/json
 Authorization: {{token}}
@@ -59,14 +52,27 @@ Authorization: {{token}}
 
 ###
 
-### DELETE user
+### ✅ DELETE user
 DELETE {{baseUrl}}/api/users/1
 Authorization: {{token}}
 
 ###
 
-### DELETE non-existing user (should return 404)
+### ❌ DELETE non-existing user
 DELETE {{baseUrl}}/api/users/999
 Authorization: {{token}}
+
+###
+
+### ❌ CREATE invalid user (validation test)
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "",
+  "email": "invalid",
+  "role": ""
+}
 
 ###
