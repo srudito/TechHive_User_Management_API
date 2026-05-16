@@ -1,0 +1,72 @@
+### Base URL
+@baseUrl = https://localhost:5001
+@token = my-secret-token
+
+### -----------------------------------
+### GET all users (WITH TOKEN)
+GET {{baseUrl}}/api/users
+Authorization: {{token}}
+
+###
+
+### GET all users (NO TOKEN - should fail)
+GET {{baseUrl}}/api/users
+
+###
+
+### GET user by ID
+GET {{baseUrl}}/api/users/1
+Authorization: {{token}}
+
+###
+
+### CREATE new user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "role": "Admin"
+}
+
+###
+
+### CREATE invalid user (should fail validation)
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "",
+  "email": "invalid",
+  "role": ""
+}
+
+###
+
+### UPDATE user
+PUT {{baseUrl}}/api/users/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "John Updated",
+  "email": "john@updated.com",
+  "role": "User"
+}
+
+###
+
+### DELETE user
+DELETE {{baseUrl}}/api/users/1
+Authorization: {{token}}
+
+###
+
+### DELETE non-existing user (should return 404)
+DELETE {{baseUrl}}/api/users/999
+Authorization: {{token}}
+
+###
